@@ -59,4 +59,5 @@ Currently includes the following parsers:
 * Rust
 * Toml
 * Typescript / TSX
+* Vim
 * Yaml
