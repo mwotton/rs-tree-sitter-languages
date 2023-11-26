@@ -254,12 +254,12 @@ fn write_pepegsit(sitter @ Sitter { lang, .. }: &Sitter) -> std::io::Result<()> 
 pub fn main() {
     let mut needs_cpp = false;
 
-    for path in get_sitters() {
-        if compile_sitter(&path) {
+    for sitter in get_sitters() {
+        if compile_sitter(&sitter) {
             needs_cpp = true;
         }
 
-        write_pepegsit(&path).unwrap();
+        write_pepegsit(&sitter).unwrap();
     }
 
     if needs_cpp {
@@ -278,7 +278,11 @@ fn static_link_with_cpp() {
             .unwrap()
             .stdout;
         let out = String::from_utf8(out).unwrap();
-        let path = Path::new(&out);
+        let path = Path::new(out.trim());
+
+        if path.is_relative() {
+            continue;
+        }
 
         if let Some(parent) = path.parent() {
             println!("cargo:rustc-link-search={}", parent.display());
