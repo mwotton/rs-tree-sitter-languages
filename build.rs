@@ -1,8 +1,10 @@
 use std::{
+    cell::OnceCell,
     env,
     fs::File,
     io::Write,
     path::{Path, PathBuf},
+    process::Command,
 };
 
 #[derive(Debug)]
@@ -10,6 +12,7 @@ struct Sitter {
     path: PathBuf,
     src: PathBuf,
     lang: String,
+    version: OnceCell<String>,
 }
 
 impl Sitter {
@@ -23,6 +26,7 @@ impl Sitter {
                     path,
                     src,
                     lang: lang.to_owned(),
+                    version: OnceCell::new(),
                 }
             }
             None => {
@@ -33,6 +37,7 @@ impl Sitter {
                     src: path.join("src"),
                     path,
                     lang,
+                    version: OnceCell::new(),
                 }
             }
         };
@@ -46,6 +51,19 @@ impl Sitter {
 
     fn src(&self) -> PathBuf {
         self.src.clone()
+    }
+
+    fn version(&self) -> &str {
+        self.version.get_or_init(|| {
+            let output = Command::new("git")
+                .arg("rev-parse")
+                .arg(format!("HEAD:{}", self.path.display()))
+                .output()
+                .expect("git rev-parse")
+                .stdout;
+
+            String::from_utf8(output).expect("utf-8").trim().to_owned()
+        })
     }
 
     fn grammar(&self) -> Option<PathBuf> {
@@ -140,6 +158,8 @@ fn write_pepegsit(sitter @ Sitter { lang, .. }: &Sitter) -> std::io::Result<()> 
     let dest_path = Path::new(&env::var_os("OUT_DIR").unwrap()).join(format!("lang_{lang}.rs"));
     let mut output = File::create(dest_path)?;
 
+    let version = sitter.version();
+
     writeln!(
         output,
         r#"
@@ -154,6 +174,11 @@ fn write_pepegsit(sitter @ Sitter { lang, .. }: &Sitter) -> std::io::Result<()> 
         /// [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
         pub fn language() -> Language {{
             unsafe {{ tree_sitter_{lang}() }}
+        }}
+
+        /// Get the commit hash or version of this grammar.
+        pub const fn version() -> &'static str {{
+            "{version}"
         }}
     "#
     )?;
@@ -226,6 +251,10 @@ fn write_pepegsit(sitter @ Sitter { lang, .. }: &Sitter) -> std::io::Result<()> 
     writeln!(
         output,
         r#"
+        #[test]
+        fn test_print_version() {{
+            println!("{{}}", super::version());
+        }}
         #[test]
         fn test_can_load_grammar() {{
             let mut parser = tree_sitter::Parser::new();
