@@ -11,6 +11,7 @@ build = "build.rs"
 include = [
     "**/*.rs",
     "Cargo.toml",
+    "sitters/tree-sitter-*/pepegsitter-version",
     "sitters/tree-sitter-*/*.js",
     "sitters/tree-sitter-*/queries/*.scm",
     "sitters/tree-sitter-*/**/*.c",

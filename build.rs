@@ -55,6 +55,11 @@ impl Sitter {
 
     fn version(&self) -> &str {
         self.version.get_or_init(|| {
+            let version_file = self.path.join("pepegsitter-version");
+            if let Ok(version) = std::fs::read_to_string(version_file) {
+                return version.trim().to_owned();
+            }
+
             let output = Command::new("git")
                 .arg("rev-parse")
                 .arg(format!("HEAD:{}", self.path.display()))
@@ -177,6 +182,8 @@ fn write_pepegsit(sitter @ Sitter { lang, .. }: &Sitter) -> std::io::Result<()> 
         }}
 
         /// Get the commit hash or version of this grammar.
+        ///
+        /// Current version: `{version}`.
         pub const fn version() -> &'static str {{
             "{version}"
         }}
