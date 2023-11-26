@@ -27,4 +27,5 @@ pepegsit!(rust, "rust", "/lang_rust.rs");
 pepegsit!(toml, "toml", "/lang_toml.rs");
 pepegsit!(tsx, "typescript-tsx", "/lang_tsx.rs");
 pepegsit!(typescript, "typescript-typescript", "/lang_typescript.rs");
+pepegsit!(vim, "vim", "/lang_vim.rs");
 pepegsit!(yaml, "yaml", "/lang_yaml.rs");

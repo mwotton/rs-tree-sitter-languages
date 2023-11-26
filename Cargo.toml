@@ -39,7 +39,7 @@ default = [
     "typescript-tsx",
     "typescript-typescript",
     "yaml",
-
+    "vim",
     "ts-highlight"
 ]
 bash = []
@@ -59,6 +59,7 @@ rust = []
 toml = []
 typescript-tsx = []
 typescript-typescript = []
+vim = []
 yaml = []
 
 ts-highlight = ["tree-sitter-highlight"]
