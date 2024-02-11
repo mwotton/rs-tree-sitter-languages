@@ -142,18 +142,22 @@ fn compile_sitter(sitter @ Sitter { lang, .. }: &Sitter) -> bool {
     }
 
     if scanner_cc.exists() {
-        cc::Build::new()
-            .cpp(true)
+        let mut cc = cc::Build::new();
+
+        cc.cpp(true)
             .flag_if_supported("-w")
             .include(&src)
-            .file(&scanner_cc)
-            .static_flag(true)
-            .cpp_link_stdlib(None)
-            .compile(&format!("{lang}-scanner_cc"));
+            .file(&scanner_cc);
+
+        // Static linking does not work on Mac.
+        if !cfg!(target_os = "macos") {
+            cc.static_flag(true).cpp_link_stdlib(None);
+            needs_cpp = true;
+        }
+
+        cc.compile(&format!("{lang}-scanner_cc"));
 
         println!("cargo:rerun-if-changed={}", scanner_cc.display());
-
-        needs_cpp = true;
     }
 
     needs_cpp
