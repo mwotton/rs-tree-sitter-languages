@@ -2,7 +2,7 @@
 name = "pepegsitter"
 description = "Collection of Tree-Sitter parsers"
 repository = "https://github.com/Dav1dde/PepegSitter"
-version = "0.2.1"
+version = "0.2.2"
 authors = ["David Herberth <github@dav1d.de>"]
 edition = "2021"
 license = "MIT"
