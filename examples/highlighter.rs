@@ -118,53 +118,50 @@ pub fn highlight(filename: &str, text: &str) -> String {
     let mut highlighter = Highlighter::new();
     let extension = filename.split(".").last().unwrap();
 
-    match FILETYPES.get(extension) {
-        Some(filetype) => {
-            eprintln!(" > highlighting file {filename:?} with type {filetype:?}");
-            let highlights = highlighter
-                .highlight(
-                    CONFIGS.get(filetype).unwrap(),
-                    text.as_bytes(),
-                    None,
-                    |injected| {
-                        eprintln!(" > highlighting injected content with type {injected:?}");
+    let Some(filetype) = FILETYPES.get(extension) else {
+        eprintln!(
+            " > highlighting: unrecognized extension '{}' with file '{}'.",
+            extension, filename
+        );
 
-                        CONFIGS.get(injected)
-                    },
-                )
-                .unwrap();
+        return encode_text(&text).into_owned();
+    };
 
-            let mut highlighted_text = String::new();
-            for event in highlights {
-                match event.unwrap() {
-                    HighlightEvent::Source { start, end } => {
-                        highlighted_text =
-                            format!("{}{}", highlighted_text, encode_text(&text[start..end]));
-                    }
-                    HighlightEvent::HighlightStart(s) => {
-                        highlighted_text = format!(
-                            "{}<span class=\"{}\">",
-                            highlighted_text,
-                            HIGHLIGHT_NAMES[s.0].replace(".", " ")
-                        );
-                    }
-                    HighlightEvent::HighlightEnd => {
-                        highlighted_text = format!("{}</span>", highlighted_text);
-                    }
-                }
+    eprintln!(" > highlighting file {filename:?} with type {filetype:?}");
+    let highlights = highlighter
+        .highlight(
+            CONFIGS.get(filetype).unwrap(),
+            text.as_bytes(),
+            None,
+            |injected| {
+                eprintln!(" > highlighting injected content with type {injected:?}");
+
+                CONFIGS.get(injected)
+            },
+        )
+        .unwrap();
+
+    let mut highlighted_text = String::new();
+    for event in highlights {
+        match event.unwrap() {
+            HighlightEvent::Source { start, end } => {
+                highlighted_text =
+                    format!("{}{}", highlighted_text, encode_text(&text[start..end]));
             }
-
-            highlighted_text
-        }
-        None => {
-            eprintln!(
-                " > highlighting: unrecognized extension '{}' with file '{}'.",
-                extension, filename
-            );
-
-            encode_text(&text).to_string()
+            HighlightEvent::HighlightStart(s) => {
+                highlighted_text = format!(
+                    "{}<span class=\"{}\">",
+                    highlighted_text,
+                    HIGHLIGHT_NAMES[s.0].replace(".", " ")
+                );
+            }
+            HighlightEvent::HighlightEnd => {
+                highlighted_text = format!("{}</span>", highlighted_text);
+            }
         }
     }
+
+    highlighted_text
 }
 
 const STYLE: &str = r#"
