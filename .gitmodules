@@ -70,3 +70,6 @@
 	path = sitters/tree-sitter-vim
 	url = https://github.com/neovim/tree-sitter-vim.git
 	shallow = true
+[submodule "sitters/tree-sitter-markdown"]
+	path = sitters/tree-sitter-markdown
+	url = https://github.com/ikatyang/tree-sitter-markdown

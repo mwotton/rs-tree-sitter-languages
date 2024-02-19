@@ -73,6 +73,7 @@ lazy_static! {
             ("haskell", pepegsitter::haskell::highlight()),
             ("d", pepegsitter::d::highlight()),
             ("java", pepegsitter::java::highlight()),
+            ("markdown", pepegsitter::markdown::highlight()),
         ]
         .map(|(key, mut val)| {
             val.configure(HIGHLIGHT_NAMES);

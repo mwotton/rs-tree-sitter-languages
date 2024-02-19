@@ -55,6 +55,7 @@ Currently includes the following parsers:
 * JavaScript
 * Json
 * Lua
+* Markdown
 * Python
 * Rust
 * Toml

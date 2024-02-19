@@ -22,6 +22,7 @@ pepegsit!(java, "java", "/lang_java.rs");
 pepegsit!(javascript, "javascript", "/lang_javascript.rs");
 pepegsit!(json, "json", "/lang_json.rs");
 pepegsit!(lua, "lua", "/lang_lua.rs");
+pepegsit!(markdown, "markdown", "/lang_markdown.rs");
 pepegsit!(python, "python", "/lang_python.rs");
 pepegsit!(rust, "rust", "/lang_rust.rs");
 pepegsit!(toml, "toml", "/lang_toml.rs");
