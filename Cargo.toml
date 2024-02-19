@@ -16,8 +16,8 @@ include = [
     "sitters/tree-sitter-*/queries/*.scm",
     "sitters/tree-sitter-*/**/*.c",
     "sitters/tree-sitter-*/**/*.h",
-    "sitters/tree-sitter-*/**/src/*.cc",
-    "sitters/tree-sitter-*/**/src/*.json",
+    "sitters/tree-sitter-*/**/*.cc",
+    "sitters/tree-sitter-*/**/node-types.json",
 ]
 
 [features]
