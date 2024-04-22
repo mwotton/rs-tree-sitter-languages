@@ -1,6 +1,6 @@
 #![doc = include_str!("../README.md")]
 
-macro_rules! pepegsit {
+macro_rules! add_parser {
     ($lang:ident, $feature:expr, $path:expr) => {
         /// Tree-Sitter parser for this grammar.
         #[cfg(feature = $feature)]
@@ -10,23 +10,23 @@ macro_rules! pepegsit {
     };
 }
 
-pepegsit!(bash, "bash", "/lang_bash.rs");
-pepegsit!(c, "c", "/lang_c.rs");
-pepegsit!(cpp, "cpp", "/lang_cpp.rs");
-pepegsit!(css, "css", "/lang_css.rs");
-pepegsit!(d, "d", "/lang_d.rs");
-pepegsit!(go, "go", "/lang_go.rs");
-pepegsit!(haskell, "haskell", "/lang_haskell.rs");
-pepegsit!(html, "html", "/lang_html.rs");
-pepegsit!(java, "java", "/lang_java.rs");
-pepegsit!(javascript, "javascript", "/lang_javascript.rs");
-pepegsit!(json, "json", "/lang_json.rs");
-pepegsit!(lua, "lua", "/lang_lua.rs");
-pepegsit!(markdown, "markdown", "/lang_markdown.rs");
-pepegsit!(python, "python", "/lang_python.rs");
-pepegsit!(rust, "rust", "/lang_rust.rs");
-pepegsit!(toml, "toml", "/lang_toml.rs");
-pepegsit!(tsx, "typescript-tsx", "/lang_tsx.rs");
-pepegsit!(typescript, "typescript-typescript", "/lang_typescript.rs");
-pepegsit!(vim, "vim", "/lang_vim.rs");
-pepegsit!(yaml, "yaml", "/lang_yaml.rs");
+add_parser!(bash, "bash", "/lang_bash.rs");
+add_parser!(c, "c", "/lang_c.rs");
+add_parser!(cpp, "cpp", "/lang_cpp.rs");
+add_parser!(css, "css", "/lang_css.rs");
+add_parser!(d, "d", "/lang_d.rs");
+add_parser!(go, "go", "/lang_go.rs");
+add_parser!(haskell, "haskell", "/lang_haskell.rs");
+add_parser!(html, "html", "/lang_html.rs");
+add_parser!(java, "java", "/lang_java.rs");
+add_parser!(javascript, "javascript", "/lang_javascript.rs");
+add_parser!(json, "json", "/lang_json.rs");
+add_parser!(lua, "lua", "/lang_lua.rs");
+add_parser!(markdown, "markdown", "/lang_markdown.rs");
+add_parser!(python, "python", "/lang_python.rs");
+add_parser!(rust, "rust", "/lang_rust.rs");
+add_parser!(toml, "toml", "/lang_toml.rs");
+add_parser!(tsx, "typescript-tsx", "/lang_tsx.rs");
+add_parser!(typescript, "typescript-typescript", "/lang_typescript.rs");
+add_parser!(vim, "vim", "/lang_vim.rs");
+add_parser!(yaml, "yaml", "/lang_yaml.rs");

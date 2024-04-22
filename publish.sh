@@ -4,7 +4,7 @@
 git submodule foreach "rm -f Cargo.toml"
 
 # Record the version, so the build script has access to it
-git submodule foreach "git rev-parse HEAD > pepegsitter-version"
+git submodule foreach "git rev-parse HEAD > treesitter-language-version"
 
 # Run the publish, user needs to pass --allow-dirty, just to make sure ...
 cargo publish $@

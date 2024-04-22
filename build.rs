@@ -55,7 +55,7 @@ impl Sitter {
 
     fn version(&self) -> &str {
         self.version.get_or_init(|| {
-            let version_file = self.path.join("pepegsitter-version");
+            let version_file = self.path.join("treesitter-language-version");
             if let Ok(version) = std::fs::read_to_string(version_file) {
                 return version.trim().to_owned();
             }
@@ -163,7 +163,7 @@ fn compile_sitter(sitter @ Sitter { lang, .. }: &Sitter) -> bool {
     needs_cpp
 }
 
-fn write_pepegsit(sitter @ Sitter { lang, .. }: &Sitter) -> std::io::Result<()> {
+fn write_parser(sitter @ Sitter { lang, .. }: &Sitter) -> std::io::Result<()> {
     let dest_path = Path::new(&env::var_os("OUT_DIR").unwrap()).join(format!("lang_{lang}.rs"));
     let mut output = File::create(dest_path)?;
 
@@ -270,7 +270,7 @@ fn write_pepegsit(sitter @ Sitter { lang, .. }: &Sitter) -> std::io::Result<()> 
         fn test_can_load_grammar() {{
             let mut parser = tree_sitter::Parser::new();
             parser
-                .set_language(super::language())
+                .set_language(&super::language())
                 .expect("Error loading {lang} language");
         }}
     "#
@@ -299,7 +299,7 @@ pub fn main() {
             needs_cpp = true;
         }
 
-        write_pepegsit(&sitter).unwrap();
+        write_parser(&sitter).unwrap();
     }
 
     if needs_cpp {
