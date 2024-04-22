@@ -2,7 +2,7 @@
 name = "rs-tree-sitter-languages"
 description = "Collection of Tree-Sitter parsers"
 repository = "https://github.com/fastrepl/rs-tree-sitter-languages"
-version = "0.0.1"
+version = "0.0.2"
 edition = "2021"
 license = "MIT"
 build = "build.rs"

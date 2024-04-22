@@ -30,3 +30,7 @@ add_parser!(tsx, "typescript-tsx", "/lang_tsx.rs");
 add_parser!(typescript, "typescript-typescript", "/lang_typescript.rs");
 add_parser!(vim, "vim", "/lang_vim.rs");
 add_parser!(yaml, "yaml", "/lang_yaml.rs");
+add_parser!(elixir, "elixir", "/lang_elixir.rs");
+add_parser!(erlang, "erlang", "/lang_erlang.rs");
+add_parser!(perl, "perl", "/lang_perl.rs");
+add_parser!(ruby, "ruby", "/lang_ruby.rs");
