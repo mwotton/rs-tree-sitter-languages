@@ -41,6 +41,10 @@ default = [
     "typescript-typescript",
     "vim",
     "yaml",
+    "elixir",
+    "erlang",
+    "perl",
+    "ruby",
 ]
 bash = []
 c = []
@@ -62,6 +66,10 @@ typescript-tsx = []
 typescript-typescript = []
 yaml = []
 vim = []
+elixir = []
+erlang = []
+perl = []
+ruby = []
 
 [dependencies]
 tree-sitter = "0.22.5"
