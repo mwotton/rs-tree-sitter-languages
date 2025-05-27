@@ -46,6 +46,7 @@ default = [
     "erlang",
     "perl",
     "ruby",
+    "vbscript",
 ]
 bash = []
 c = []
@@ -72,6 +73,7 @@ elixir = []
 erlang = []
 perl = []
 ruby = []
+vbscript = []
 
 [dependencies]
 tree-sitter = "0.22.5"

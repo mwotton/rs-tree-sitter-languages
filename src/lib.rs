@@ -35,3 +35,4 @@ add_parser!(erlang, "erlang", "/lang_erlang.rs");
 add_parser!(perl, "perl", "/lang_perl.rs");
 add_parser!(php, "php", "/lang_php.rs");
 add_parser!(ruby, "ruby", "/lang_ruby.rs");
+add_parser!(vbscript, "vbscript", "/lang_vbscript.rs");
