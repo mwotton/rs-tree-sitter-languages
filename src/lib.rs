@@ -33,4 +33,5 @@ add_parser!(yaml, "yaml", "/lang_yaml.rs");
 add_parser!(elixir, "elixir", "/lang_elixir.rs");
 add_parser!(erlang, "erlang", "/lang_erlang.rs");
 add_parser!(perl, "perl", "/lang_perl.rs");
+add_parser!(php, "php", "/lang_php.rs");
 add_parser!(ruby, "ruby", "/lang_ruby.rs");
