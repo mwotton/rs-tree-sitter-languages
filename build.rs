@@ -32,10 +32,15 @@ impl Sitter {
             None => {
                 let lang = feature;
                 let path = PathBuf::from(format!("sitters/tree-sitter-{lang}"));
+                // Support grammars with nested src directories (e.g., PHP)
+                let mut src = path.join("src");
+                if !src.exists() {
+                    src = path.join(&lang).join("src");
+                }
 
                 Self {
-                    src: path.join("src"),
                     path,
+                    src,
                     lang,
                     version: OnceCell::new(),
                 }
